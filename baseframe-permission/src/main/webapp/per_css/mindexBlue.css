@@ -1,0 +1,22 @@
+@charset "utf-8";
+/* CSS Document */
+body,div,img,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,table,thead,tbody,th,td {    
+    margin:0;   
+    padding:0;
+	}
+	
+body{ font: 12px/1.8 '宋休',tahoma, Srial, helvetica, sans-serif; 
+	text-align:center;
+	background-color:#16083d;/*背景为红色时#270b13;*/
+	overflow:hidden;
+    } 
+img {border:0;}
+.mindex_bg{width:100%;background:url(../images/blue_bg.jpg) no-repeat center top;margin:0 auto;overflow:hidden;zoom:1;}
+/*背景为红色时换成red_bg.jpg*/
+
+.mindex{width:990px; margin:auto}
+.mindex_title{font-size:42px; font-family:"微软雅黑";color:#fff; margin-top:30px;_margin-top:40px; text-align:left;}
+.wrapper1{ padding:16px 0;}
+*#thumb1-1,#thumb1-2,#thumb1-3,#thumb1-4,#thumb1-5,#thumb1-6,#thumb1-7{ display:inline; float:left; margin:5px; text-align:center;}
+.clear{ clear:both; text-align:left; line-height:20px; padding:5px;}
+a{ color:#fff; text-decoration:none;}

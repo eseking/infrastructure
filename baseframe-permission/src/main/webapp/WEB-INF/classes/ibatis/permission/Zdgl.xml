@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<sqlMap namespace="ZDGL">
+	<select id="queryDmzd" resultClass="com.bsoft.baseframe.entity.base.Dmzd"
+		parameterClass="java.util.Map">
+		select * from (
+		        select top $endNum$ row_number()over(order by TT.typecode1) as RN,* from (
+		            SELECT * FROM sq_dmzd1 where 1=1
+		            <dynamic>
+		                  <isNotEmpty property="typecode1" prepend=" and ">typecode1=#typecode1#</isNotEmpty>
+		                 <!--  <isNotEmpty property="typename" prepend=" and ">(typename like '%$typename$%')</isNotEmpty> -->
+		            </dynamic>
+		            <dynamic>
+		                  <isNotEmpty property="typename" prepend=" and ">(typename like '%$typename$%')</isNotEmpty>
+		             </dynamic>
+		)as TT) as H where RN>#startNum#
+	</select>
+	<select id="countDmzd" resultClass="int">
+		select count(*) as  countnum  from sq_dmzd1
+		where 1=1
+		   <dynamic>
+		          <isNotEmpty property="typecode1" prepend=" and ">typecode1=#typecode1#</isNotEmpty>
+		          <!-- <isNotEmpty property="typename" prepend=" and ">(typename like '%$typename$%')</isNotEmpty> -->
+		   </dynamic>
+		   <dynamic>
+		          <isNotEmpty property="typename" prepend=" and ">(typename like '%$typename$%')</isNotEmpty>
+		   </dynamic>		
+		
+	</select>
+	<select id="getNameDmzdMx" resultClass="java.lang.String">
+	      select * from sq_dmzd1 where typename like '%'+#typename#+'%'
+	</select>
+  	 <!--根据typecode1获取sq_dmzd1mx表里的详细信息-->
+	<select id="getDmzdMx" resultClass="com.bsoft.baseframe.entity.base.DmzdMx"
+		parameterClass="java.util.Map">
+		select typecode1,typecode2,typename,pid from sq_dmzd1mx where
+		typecode1=#typecode1#
+	</select>
+ 	<!--在字典明细表sq_dmzd1mx表中增加一条记录-->
+	<insert id="addDmzdMX" parameterClass="com.bsoft.baseframe.entity.base.DmzdMx">
+		INSERT INTO sq_dmzd1mx
+		(typecode1,typecode2,typename,pid,pym)
+		VALUES
+		(#typecode1#,#typecode2#,#typename#,#pid#,#pym#)
+	</insert>
+	<!--控制字典表中字典编码的大小 -->
+	<select id="generateTypecode1" resultClass="java.lang.String">
+		select max(typecode1) from sq_dmzd1 where '99999' > typecode1;
+	</select>
+     <!--在字典表里面添加数据 -->
+	<insert id="addDmzd" parameterClass="com.bsoft.baseframe.entity.base.Dmzd">
+		INSERT INTO sq_dmzd1
+		(typecode1,typename,cid,pym)
+		VALUES
+		(#typecode1#,#typename#,#cid#,#pym#)
+	</insert>
+	 <!--得到所有的数据字典类别 -->
+	 <select id="listAlldic"  resultClass="com.bsoft.baseframe.entity.base.Dmzd">
+	    select typecode1 as dicKey,typename as dicValue,pym,wbm from sq_dmzd1
+	 </select>
+	 
+	  <!-- 根据类别获取字典明细-->
+	 <select id="listMxByType"  resultClass="com.bsoft.baseframe.entity.base.DmzdMx">
+	    select typecode2 as dicKey,typename as dicValue,pym,wbm ,typecode1 as cate,pid from sq_dmzd1mx where typecode1 = #value#
+	 </select> 
+	  <!-- 删除字典明细 -->
+	  <delete id="deleteDmzdMX" parameterClass="java.util.Map">
+	  	delete from sq_dmzd1mx where typecode1=#typecode1#
+	</delete>
+	
+	 <!-- 删除字典类别 -->
+	  <delete id="deleteDmzdType" parameterClass="java.util.Map">
+	  	delete from sq_dmzd1 where typecode1=#typecode1#
+	</delete>
+	 <!-- 查询社区的下拉列表框  -->
+      <select id="getDmzdMXBySQ" parameterClass="java.util.Map" resultClass="com.bsoft.baseframe.entity.base.DmzdMx" > 
+     	select * FROM sq_dmzd1mx where typecode1=#typecode1#
+     </select>
+      <!-- 查询银行的下拉列表框  -->
+     <select id="getDmzdMXByYH" parameterClass="java.util.Map" resultClass="com.bsoft.baseframe.entity.base.DmzdMx" > 
+     	select * FROM sq_dmzd1mx where typecode1=#typecode1#
+     </select>
+      <!-- 查询社区与银行  -->
+     <select id="getDmzdLimits" parameterClass="java.util.Map" resultClass="com.bsoft.baseframe.entity.base.Dmzd" > 
+     	select typecode1,typename FROM sq_dmzd1 where ext1=1
+     </select>
+      <!-- 根据typecode1来查询社区以及编码 -->
+      <select id="getTypecode1Limit" parameterClass="java.util.Map" resultClass="com.bsoft.baseframe.entity.base.DmzdMx" > 
+     	select * FROM sq_dmzd1mx where typecode1=#typecode1#
+     </select>
+</sqlMap>

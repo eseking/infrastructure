@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns:context="http://www.springframework.org/schema/context"
+          xsi:schemaLocation="
+   http://www.springframework.org/schema/beans 
+   http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+   http://www.springframework.org/schema/context 
+   http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+<context:annotation-config/> 
+ 	<!--权限service -->
+    <bean id="permissionService" class="com.bsoft.baseframe.service.permission.impl.PermissionServiceImpl" parent="baseFrameService">
+		  
+	</bean>
+	
+	<!-- 角色service -->
+	<bean id="roleService" class="com.bsoft.baseframe.service.permission.impl.RoleServiceImpl" parent="baseFrameService">
+		  
+	</bean>
+	
+	<!-- 字典service -->
+	<bean id="zdglService" class="com.bsoft.baseframe.service.permission.impl.ZdglServiceImpl" parent="baseFrameService">
+	 <property name="cache" ref="ehCache" />
+	</bean>
+	
+	<!-- 菜单service -->
+	<bean id="menuService" class="com.bsoft.baseframe.service.permission.impl.MenuServiceImpl" parent="baseFrameService">
+		  
+	</bean>
+	<!--用户service -->
+	<bean id="baseFrameUserService" class="com.bsoft.baseframe.service.permission.impl.BaseFrameUserServiceImpl" parent="baseFrameService">
+	</bean>
+	<!-- 初始化 -->
+	<bean id="PermissionInitUtil" class="com.bsoft.baseframe.permission.util.PermissionInitUtil" init-method="initCache">
+		 
+	</bean>
+	
+     <!-- 业务操作权限表 -->
+     <bean id="operPermissionServiceImpl" class="com.bsoft.baseframe.service.permission.impl.OperPermissionServiceImpl" >
+         <property name="baseDao">
+           <ref bean="baseFrameDao" />
+         </property>
+    </bean>
+    
+</beans>

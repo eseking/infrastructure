@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="MENUPERMISSION">
+  <insert id="addMenuPermission" parameterClass="com.bsoft.baseframe.entity.base.MenuPermission">insert into MenuPermission(id, pageId, menuList, permissionSn, remark, delflag, ctb1, ctb2, ctb3, ctb4, ext1, ext2, ext3) values (#id#, #pageId#, #menuList#, #permissionSn#, #remark#, #delflag#, getdate(), #ctb2#, #ctb3#, #ctb4#, #ext1#, #ext2#, #ext3#)</insert>
+  <delete id="removeMenuPermission" parameterClass="com.bsoft.baseframe.entity.base.MenuPermission">delete from MenuPermission where id = #id#</delete>
+  <update id="delPer" parameterClass="com.bsoft.baseframe.entity.base.MenuPermission">update MenuPermission set delflag=#delflag# where id = #id#</update>
+  <select id="getOneMenuPermission" parameterClass="com.bsoft.baseframe.entity.base.MenuPermission" resultClass="com.bsoft.baseframe.entity.base.MenuPermission">select * from MenuPermission where id = #id#</select>
+  <select id="queryCount" resultClass="int">select count(*) as countnum from MenuPermission where 1=1</select>
+  <select id="listMenuPermission" resultClass="com.bsoft.baseframe.entity.base.MenuPermission" parameterClass="java.util.Map">select * from (select top $endNum$ row_number()over(order by TT.id) as RN,* from(SELECT * FROM MenuPermission where 1=1) as TT)as H where RN &gt; #startNum#</select>
+  <update id="upSapMenuPermission" parameterClass="com.bsoft.baseframe.entity.base.MenuPermission">UPDATE MenuPermission 
+    <dynamic prepend="set">
+      <isNotNull property="pageId" removeFirstPrepend="true" prepend=",">pageId=#pageId#</isNotNull>
+      <isNotNull property="menuList" removeFirstPrepend="true" prepend=",">menuList=#menuList#</isNotNull>
+      <isNotNull property="permissionSn" removeFirstPrepend="true" prepend=",">permissionSn=#permissionSn#</isNotNull>
+      <isNotNull property="remark" removeFirstPrepend="true" prepend=",">remark=#remark#</isNotNull>
+      <isNotNull property="delflag" removeFirstPrepend="true" prepend=",">delflag=#delflag#</isNotNull>
+      <isNotNull property="ctb1" removeFirstPrepend="true" prepend=",">ctb1=#ctb1#</isNotNull>
+      <isNotNull property="ctb2" removeFirstPrepend="true" prepend=",">ctb2=#ctb2#</isNotNull>
+      <isNotNull property="ctb3" removeFirstPrepend="true" prepend=",">ctb3=#ctb3#</isNotNull>
+      <isNotNull property="ctb4" removeFirstPrepend="true" prepend=",">ctb4=#ctb4#</isNotNull>
+      <isNotNull property="ext1" removeFirstPrepend="true" prepend=",">ext1=#ext1#</isNotNull>
+      <isNotNull property="ext2" removeFirstPrepend="true" prepend=",">ext2=#ext2#</isNotNull>
+      <isNotNull property="ext3" removeFirstPrepend="true" prepend=",">ext3=#ext3#</isNotNull>
+    </dynamic> where 
+    <isNotNull property="id">id = #id#</isNotNull>
+  </update>
+  <update id="updateMenuPermission" parameterClass="com.bsoft.baseframe.entity.base.MenuPermission">update MenuPermission set pageId=#pageId#, menuList=#menuList#, permissionSn=#permissionSn#, remark=#remark#, delflag=#delflag#, ctb1=#ctb1#, ctb2=#ctb2#, ctb3=getdate(), ctb4=#ctb4#, ext1=#ext1#, ext2=#ext2#, ext3=#ext3# where id = #id#</update>
+
+
+ <select id="getAccessMenu" parameterClass="java.util.Map" resultClass="com.bsoft.baseframe.entity.base.MenuPermission">
+		 select m.* from MenuPermission m join permissionInfo p on 
+		 m.id =p.permissionSn  where p.principalSn =#principalSn# and p.permissionType=#permissionType#
+ </select>
+ 
+ <delete id="delMenuPermission" parameterClass="java.util.Map">
+ 			delete from MenuPermission  where id = (
+ 				select permissionSn from permissionInfo  where principalSn =#principalSn# and permissionType=#type#
+ 			) 
+ </delete>
+ 
+  
+ <delete id="delPermission" parameterClass="java.util.Map">
+ 			delete from permissionInfo where principalSn =#principalSn# and permissionType=#type#
+ </delete>
+ 
+ 			
+
+</sqlMap>

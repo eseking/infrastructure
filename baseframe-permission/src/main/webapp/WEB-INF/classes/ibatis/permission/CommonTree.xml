@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" 
+"http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<!-- 模板 -->
+<sqlMap namespace="CommonTree">
+    <!-- 数据表映射 -->
+    <resultMap class="com.bsoft.baseframe.entity.base.CommonTrees" id="rCommonTree">
+        <result property="id" column="Id"/> <!-- 主键 -->
+        <result property="leaf" column="Leaf"/> <!-- 叶子节点 -->
+        <result property="OrderIndex" column="OrderIndex"/> <!-- 排序号 -->
+        <result property="text" column="Text"/> <!-- 显示名称 -->
+        <result property="Pid" column="Pid"/> <!-- 父节点 -->
+        <result property="info" column="INFO"/> <!-- 指标名称 -->
+        <result property="DescInfo" column="DescInfo"/> <!-- 描述 -->
+        <result property="DELFLG" column="DELFLG"/> <!-- 有效标记 -->
+        <result property="CTB1" column="CTB1"/> <!-- 创建时间 -->
+        <result property="CTB2" column="CTB2"/> <!-- 创建者ID -->
+        <result property="CTB3" column="CTB3"/> <!-- 更新时间 -->
+        <result property="CTB4" column="CTB4"/> <!-- 更新者ID -->
+        <result property="EXT1" column="EXT1"/> <!-- 扩展1 -->
+        <result property="EXT2" column="EXT2"/> <!-- 扩展2 -->
+        <result property="EXT3" column="EXT3"/> <!-- 扩展3 -->
+    </resultMap>
+    <!-- 插入数据 -->
+    <insert id="addCommonTree" parameterClass="com.bsoft.baseframe.entity.base.CommonTrees">
+        INSERT INTO CommonTree(
+            Id,   <!-- 主键 -->
+            Leaf,   <!-- 叶子节点 -->
+            OrderIndex,   <!-- 排序号 -->
+            Text,   <!-- 显示名称 -->
+            Pid,   <!-- 父节点 -->
+            Info,   <!-- 指标名称 -->
+            DescInfo,   <!-- 描述 -->
+            DELFLG,   <!-- 有效标记 -->
+            CTB1,   <!-- 创建时间 -->
+            CTB2,   <!-- 创建者ID -->
+            CTB3,   <!-- 更新时间 -->
+            CTB4,   <!-- 更新者ID -->
+            EXT1,   <!-- 扩展1 -->
+            EXT2,   <!-- 扩展2 -->
+            EXT3,   <!-- 扩展3 -->
+            EXT4,   <!-- 扩展2 -->
+            EXT5,   <!-- 扩展3 -->
+            EXT6,   <!-- 扩展2 -->
+            EXT7,   <!-- 扩展3 -->
+            EXT8,   <!-- 扩展2 -->
+            EXT9,   <!-- 扩展3 -->
+            EXT10   <!-- 扩展2 -->
+            
+        ) VALUES (
+            #id#,
+            #leaf#,
+            #OrderIndex#,
+            #text#,
+            #Pid#,
+            #info#,
+            #DescInfo#,
+            #DELFLG#,
+            getdate(),
+            #CTB2#,
+            #CTB3#,
+            #CTB4#,
+            #EXT1#,
+            #EXT2#,
+            #EXT3#,
+            #EXT4#,
+            #EXT5#,
+            #EXT6#,
+            #EXT7#,
+            #EXT8#,
+            #EXT9#,
+            #EXT10#
+        )
+    </insert>
+    <!-- 修改数据 -->
+    <update id="updateCommonTree" parameterClass="com.bsoft.baseframe.entity.base.CommonTrees">
+        UPDATE CommonTree SET  CTB3 = getdate()  <!-- 更新时间 -->
+            <dynamic>
+                <isNotNull property="leaf" prepend=","><!-- 叶子节点 -->
+                    Leaf = #leaf#
+                </isNotNull>
+                <isNotNull property="OrderIndex" prepend=","><!-- 排序号 -->
+                    OrderIndex = #OrderIndex#
+                </isNotNull>
+                <isNotNull property="text" prepend=","><!-- 显示名称 -->
+                    Text = #text#
+                </isNotNull>
+                <isNotNull property="Pid" prepend=","><!-- 父节点 -->
+                    Pid = #Pid#
+                </isNotNull>
+                <isNotNull property="info" prepend=","><!-- 指标名称 -->
+                    Info = #info#
+                </isNotNull>
+                  <isNotNull property="DELFLG" prepend=","><!-- 有效标记 -->
+                    DELFLG = #DELFLG#
+                </isNotNull>
+                <isNotNull property="DescInfo" prepend=","><!-- 描述 -->
+                    DescInfo = #DescInfo#
+                </isNotNull>
+              
+                <isNotNull property="CTB1" prepend=","><!-- 创建时间 -->
+                    CTB1 = #CTB1#
+                </isNotNull>
+                <isNotNull property="CTB2" prepend=","><!-- 创建者ID -->
+                    CTB2 = #CTB2#
+                </isNotNull>
+                <isNotNull property="CTB4" prepend=","><!-- 更新者ID -->
+                    CTB4 = #CTB4#
+                </isNotNull>
+                <isNotNull property="EXT1" prepend=","><!-- 扩展1 -->
+                    EXT1 = #EXT1#
+                </isNotNull>
+                <isNotNull property="EXT2" prepend=","><!-- 扩展2 -->
+                    EXT2 = #EXT2#
+                </isNotNull>
+                <isNotNull property="EXT3" prepend=","><!-- 扩展3 -->
+                    EXT3 = #EXT3#
+                </isNotNull>
+                <isNotNull property="EXT4" prepend=","><!-- 扩展3 -->
+                    EXT4 = #EXT4#
+                </isNotNull>
+                <isNotNull property="EXT5" prepend=","><!-- 扩展3 -->
+                    EXT5 = #EXT5#
+                </isNotNull>
+                 <isNotNull property="EXT6" prepend=","><!-- 扩展3 -->
+                    EXT6 = #EXT6#
+                </isNotNull>
+                <isNotNull property="EXT7" prepend=","><!-- 扩展3 -->
+                    EXT7 = #EXT7#
+                </isNotNull>
+            </dynamic>
+        WHERE
+                <isNotNull property="id"><!-- 主键 -->
+                    Id = #id#
+                </isNotNull>
+    </update>
+ 
+   
+	
+	  <!-- 查询信息  -->
+    <select id="listRootTree" resultClass="com.bsoft.baseframe.entity.base.CommonTrees" > 
+        SELECT * FROM CommonTree where pid is null order by EXT9
+          
+    </select>
+    
+    
+     <select id="listTree" resultClass="com.bsoft.baseframe.entity.base.CommonTrees" parameterClass="java.lang.String"> 
+        SELECT * FROM CommonTree where pid =#value#  order by EXT9
+    </select>
+  
+    <select id="listTreeById" resultClass="com.bsoft.baseframe.entity.base.CommonTrees" > 
+        SELECT * FROM CommonTree where id =#id#
+          
+    </select>
+    
+     <select id="listTreeByPid" resultClass="com.bsoft.baseframe.entity.base.CommonTrees" > 
+        SELECT * FROM CommonTree where pid =#value#  order by EXT9
+          
+    </select>
+    
+     <!-- 根据id删除对应的记录 -->
+    <delete id="delTree" parameterClass="java.lang.String">
+		delete from CommonTree where id = #value#
+	</delete>
+ </sqlMap>

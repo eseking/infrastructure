@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="MENU">
+  <insert id="addMenu" parameterClass="com.bsoft.baseframe.entity.base.Menu">insert into Menu(id, leaf, orderIndex, name, info, pid, delflag, ctb1, ctb2, ctb3, ctb4, ext1, ext2, ext3) values (#id#, #leaf#, #orderIndex#, #name#, #info#, #pid#, 0, getdate(), #ctb2#, #ctb3#, #ctb4#, #ext1#, #ext2#, #ext3#)</insert>
+  <delete id="removeMenu" >delete from Menu where id = #value#</delete>
+  <update id="delMenu" parameterClass="com.bsoft.baseframe.entity.base.Menu">update Menu set delflag=#delflag# where id = #id#</update>
+  <select id="getOneMenu"  parameterClass="java.lang.String" resultClass="com.bsoft.baseframe.entity.base.Menu">select * from Menu where id = #id#</select>
+
+ <select id="getMenuById"  resultClass="com.bsoft.baseframe.entity.base.Menu">select * from Menu where id = #value#</select>
+ 
+ <select id="countMenuByPid"  resultClass="int">select count(*) from Menu where pid = #value#</select>
+ 
+  <select id="queryCount" resultClass="int">select count(*) as countnum from Menu where 1=1</select>
+  <select id="listMenuPage" resultClass="com.bsoft.baseframe.entity.base.Menu" parameterClass="java.util.Map">select * from (select top $endNum$ row_number()over(order by TT.id) as RN,* from(SELECT * FROM Menu where 1=1) as TT)as H where RN &gt; #startNum#</select>
+  <update id="upSapMenu" parameterClass="com.bsoft.baseframe.entity.base.Menu">UPDATE Menu 
+    <dynamic prepend="set">
+      <isNotNull property="leaf" removeFirstPrepend="true" prepend=",">leaf=#leaf#</isNotNull>
+      <isNotNull property="orderIndex" removeFirstPrepend="true" prepend=",">orderIndex=#orderIndex#</isNotNull>
+      <isNotNull property="name" removeFirstPrepend="true" prepend=",">name=#name#</isNotNull>
+      <isNotNull property="info" removeFirstPrepend="true" prepend=",">info=#info#</isNotNull>
+      <isNotNull property="pid" removeFirstPrepend="true" prepend=",">pid=#pid#</isNotNull>
+      <isNotNull property="delflag" removeFirstPrepend="true" prepend=",">delflag=#delflag#</isNotNull>
+      <isNotNull property="ctb1" removeFirstPrepend="true" prepend=",">ctb1=#ctb1#</isNotNull>
+      <isNotNull property="ctb2" removeFirstPrepend="true" prepend=",">ctb2=#ctb2#</isNotNull>
+      <isNotNull property="ctb4" removeFirstPrepend="true" prepend=",">ctb4=#ctb4#</isNotNull>
+      <isNotNull property="ext1" removeFirstPrepend="true" prepend=",">ext1=#ext1#</isNotNull>
+      <isNotNull property="ext2" removeFirstPrepend="true" prepend=",">ext2=#ext2#</isNotNull>
+      <isNotNull property="ext3" removeFirstPrepend="true" prepend=",">ext3=#ext3#</isNotNull>
+    </dynamic>
+   ,ctb3=getdate()  where 
+    <isNotNull property="id">id = #id#</isNotNull>
+  </update>
+  <update id="updateMenu" parameterClass="com.bsoft.baseframe.entity.base.Menu">update Menu set leaf=#leaf#, orderIndex=#orderIndex#, name=#name#, info=#info#, pid=#pid#, delflag=#delflag#, ctb1=#ctb1#, ctb2=#ctb2#, ctb3=getdate(), ctb4=#ctb4#, ext1=#ext1#, ext2=#ext2#, ext3=#ext3# where id = #id#</update>
+
+<select id="listAllMenu" resultClass="com.bsoft.baseframe.entity.base.Menu">select * from menu m where m.pid is null order by m.orderIndex</select>
+ 
+ <select id="listRootMenu" resultClass="com.bsoft.baseframe.entity.base.Menu">select m.* from menu m join menu p on m.pid = p.id where p.pid is null order by m.orderIndex</select>
+ <select id="listMenu" resultClass="com.bsoft.baseframe.entity.base.Menu">select * from Menu where pid = #value# order by orderIndex</select>
+
+</sqlMap>

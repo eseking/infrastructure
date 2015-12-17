@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns:context="http://www.springframework.org/schema/context"
+          xmlns:aop="http://www.springframework.org/schema/aop"
+          xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		   http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+		   http://www.springframework.org/schema/context/spring-context-2.5.xsd
+		   http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:ibatis/db.properties</value>
+			</list>
+		</property>
+	</bean>
+	
+	
+	
+	<!-- 事务管理器-->
+   	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+ 		<!--  <property name="dataSource" ref="dataSource" />-->
+ 		<property name="dataSource" ref="dataSourceBoneCP" />
+	</bean>
+
+	<bean id="transactionInterceptor" class="org.springframework.transaction.interceptor.TransactionInterceptor">
+		<!--  事务拦截器bean需要依赖注入一个事务管理器 -->
+		<property name="transactionManager" ref="txManager" />
+		<property name="transactionAttributes">
+			<!--  下面定义事务传播属性-->
+			<props>
+				<prop key="find*">PROPAGATION_REQUIRED,readOnly</prop>
+				<prop key="list*">PROPAGATION_REQUIRED,readOnly</prop>
+				<prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
+				<prop key="del*">PROPAGATION_REQUIRED,-Exception</prop>
+				<prop key="add*">PROPAGATION_REQUIRED,-Exception</prop>
+				<prop key="save*">PROPAGATION_REQUIRED,-Exception</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-Exception</prop>
+				<prop key="call*">PROPAGATION_REQUIRED,-Exception</prop>
+				<!--  
+				日志记录 使用PROPAGATION_REQUIRES_NEW 开启新事物 操作异常不会导致日志回滚
+				在配置多个拦截器时  如果先配置事务拦截器  则需要PROPAGATION_REQUIRES_NEW
+				如果先加载日志拦截器  则无需PROPAGATION_REQUIRES_NEW
+				<prop key="logInfo">PROPAGATION_REQUIRES_NEW,-Exception</prop>-->
+				
+				<!-- 异常记录 使用PROPAGATION_REQUIRES_NEW 开启新事务 -->
+				<prop key="logError">PROPAGATION_REQUIRES_NEW,-Exception</prop>
+				<prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+			</props>
+		</property>
+	</bean>
+	
+	
+	<bean id="transaction" class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+		<!-- 定义BeanNameAutoProxyCreator-->
+		<property name="beanNames">
+			<!--  下面是所有需要自动创建事务代理的bean  所有以Impl 结尾的都会创建事务代理-->
+			<value>*Service*</value>
+		</property>
+		<!--  下面定义BeanNameAutoProxyCreator所需的事务拦截器-->
+		<property name="interceptorNames">
+			<list>
+				<!-- 此处可增加其他新的Interceptor -->
+				
+					<!-- 事务拦截器 -->
+				<value>transactionInterceptor</value>	
+			
+			</list>
+		</property>
+	</bean>
+	
+	<!--根据dataSource和configLocation创建一个SqlMapClient-->  
+	<bean id="sqlMapClient"  class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">  
+   		<property name="configLocations">  
+   		   <list> 
+    		<value>classpath:ibatis/SqlMapConfig*.xml</value>  
+    	   </list>
+   		</property>  
+   		<!--<property name="dataSource" ref="dataSource" /> -->
+   		<property name="dataSource" ref="dataSourceBoneCP" /> 
+   		
+	</bean>  
+   
+  	<!--根据sqlMapClien创建一个SqlMapClient模版类-->    
+  	<bean id="sqlMapClientTemplate" class="org.springframework.orm.ibatis.SqlMapClientTemplate">  
+   		<property name="sqlMapClient" ref="sqlMapClient" />  
+  	</bean>  
+  
+  	<!-- 缓存的配置： -->
+  	<!-- 引用ehCache的配置 -->     
+	<bean id="defaultCacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">     
+   		<property name="configLocation">     
+   			<value>classpath:ehcache/ehcache.xml</value>     
+   		</property>     
+	</bean>     
+	
+   
+	<!-- 定义ehCache的工厂，并设置所使用的Cache name -->     
+	<bean id="ehCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean">     
+   		<property name="cacheManager">     
+   			<ref local="defaultCacheManager"/>     
+   		</property>     
+   		<property name="cacheName">     
+      		<value>CACHE1</value>     
+   		</property>     
+	</bean>     
+   
+	
+	
+</beans>
+

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PERMISSIONINFO">
+  <insert id="addPermissionInfo" parameterClass="com.bsoft.baseframe.entity.base.PermissionInfo">insert into PermissionInfo(id, principalType, principalSn, permissionType, permissionSn, remark, delflag, ctb1, ctb2, ctb3, ctb4, ext1, ext2, ext3) values (#id#, #principalType#, #principalSn#, #permissionType#, #permissionSn#, #remark#, #delflag#, getdate(), #ctb2#, #ctb3#, #ctb4#, #ext1#, #ext2#, #ext3#)</insert>
+  <delete id="removePermissionInfo" parameterClass="com.bsoft.baseframe.entity.base.PermissionInfo">delete from PermissionInfo where id = #id#</delete>
+  <update id="delPermissionInfo" parameterClass="com.bsoft.baseframe.entity.base.PermissionInfo">update PermissionInfo set delflag=#delflag# where id = #id#</update>
+  <select id="getOnePermissionInfo" parameterClass="com.bsoft.baseframe.entity.base.PermissionInfo" resultClass="com.bsoft.baseframe.entity.base.PermissionInfo">select * from PermissionInfo where id = #id#</select>
+  <select id="queryCount" resultClass="int">select count(*) as countnum from PermissionInfo where 1=1</select>
+  <select id="listPermissionInfo" resultClass="com.bsoft.baseframe.entity.base.PermissionInfo" parameterClass="java.util.Map">select * from (select top $endNum$ row_number()over(order by TT.id) as RN,* from(SELECT * FROM PermissionInfo where 1=1) as TT)as H where RN &gt; #startNum#</select>
+  <update id="upSapPermissionInfo" parameterClass="com.bsoft.baseframe.entity.base.PermissionInfo">UPDATE PermissionInfo 
+    <dynamic prepend="set">
+      <isNotNull property="principalType" removeFirstPrepend="true" prepend=",">principalType=#principalType#</isNotNull>
+      <isNotNull property="principalSn" removeFirstPrepend="true" prepend=",">principalSn=#principalSn#</isNotNull>
+      <isNotNull property="permissionType" removeFirstPrepend="true" prepend=",">permissionType=#permissionType#</isNotNull>
+      <isNotNull property="permissionSn" removeFirstPrepend="true" prepend=",">permissionSn=#permissionSn#</isNotNull>
+      <isNotNull property="remark" removeFirstPrepend="true" prepend=",">remark=#remark#</isNotNull>
+      <isNotNull property="delflag" removeFirstPrepend="true" prepend=",">delflag=#delflag#</isNotNull>
+      <isNotNull property="ctb1" removeFirstPrepend="true" prepend=",">ctb1=#ctb1#</isNotNull>
+      <isNotNull property="ctb2" removeFirstPrepend="true" prepend=",">ctb2=#ctb2#</isNotNull>
+      <isNotNull property="ctb3" removeFirstPrepend="true" prepend=",">ctb3=#ctb3#</isNotNull>
+      <isNotNull property="ctb4" removeFirstPrepend="true" prepend=",">ctb4=#ctb4#</isNotNull>
+      <isNotNull property="ext1" removeFirstPrepend="true" prepend=",">ext1=#ext1#</isNotNull>
+      <isNotNull property="ext2" removeFirstPrepend="true" prepend=",">ext2=#ext2#</isNotNull>
+      <isNotNull property="ext3" removeFirstPrepend="true" prepend=",">ext3=#ext3#</isNotNull>
+    </dynamic> where 
+    <isNotNull property="id">id = #id#</isNotNull>
+  </update>
+  <update id="updatePermissionInfo" parameterClass="com.bsoft.baseframe.entity.base.PermissionInfo">update PermissionInfo set principalType=#principalType#, principalSn=#principalSn#, permissionType=#permissionType#, permissionSn=#permissionSn#, remark=#remark#, delflag=#delflag#, ctb1=#ctb1#, ctb2=#ctb2#, ctb3=getdate(), ctb4=#ctb4#, ext1=#ext1#, ext2=#ext2#, ext3=#ext3# where id = #id#</update>
+  
+  <select id="getOperPermission" parameterClass="java.util.Map" resultClass="java.lang.String">
+  	select datalist from OperPermission where delflag=0 and id in(
+	select permissionsn from permissioninfo where permissiontype=3 and principalsn in (select roleid from UsersRoles where uid=#userid#))
+  </select>
+  
+</sqlMap>

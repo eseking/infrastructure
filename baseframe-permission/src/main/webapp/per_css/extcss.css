@@ -1,0 +1,134 @@
+.zhb-font-size {
+	font-size: 14px;
+}
+
+table tr th {
+	font-size: 16px;
+	font-weight: bold;
+	text-align: center;
+	background-color: gray;
+}
+
+.td {
+	background-image: url(../images/menu/main2_02.gif);
+	background-repeat: repeat-x;
+	font-family: "����";
+	font-size: 12px;
+	padding-left: 15px;
+	height: 22px;
+}
+
+tr.graycls td div {
+	background-color: #e1e1e1
+}
+
+tr.redcls td div {
+	background-color: #FF9797
+}
+
+tr.bluecls td div {
+	background-color: #afb4db
+}
+
+tr.yellowcls td div {
+	background-color: #fcf16e
+}
+
+tr.orangecls td div {
+	background-color: #fab27b
+}
+.top {
+	background-image: url(../images/menu/main2_01.gif);
+	background-color: #0D49CD;
+	background-repeat: no-repeat;
+	height: 74px;
+}
+
+.tr-red div {
+	background-color: #ff0000;
+}
+.tr-light-green div {
+	background-color: #00ff00;
+}
+.tr-blues div {
+	background-color: #0000ff;
+}
+.tr-light-yellow div{
+	background-color: CAFF70;
+}
+.firstsettings{
+	background-image: url("../images/system.png") !important;
+}
+
+/* 首页定制样式 */
+.bold{
+	font-weight: bold;
+}
+
+.fistPage-home-save{
+	background-image: url("../images/save.gif") !important;
+}
+
+.firstPage-home-show{
+	background-image: url("../images/chart_pie.png") !important;
+}
+/* 消息盒样式 */
+.messageBox-base{
+	background-color: white;
+}
+.messageBox-icon{
+	background-image: url("../images/message/sound.png") !important;
+}
+/*不明原因肺炎病流调表label字体样式*/
+.classDiv1{font-size: 12px}}
+
+/* `img 图片样式*/
+.img-tool{
+	margin-top: 5px;	
+}
+.font-postion{
+	margin-bottom: 2;
+}
+.logout-icon{
+	background-image: url("../images/exit.png") !important;
+}
+.editpass-icon{
+	background-image: url("../images/theme/edit.png") !important;
+}
+.theme-switch-icon{
+	background-image: url("../images/theme/theme_switch.png") !important;
+}
+.makePage-icon
+{
+	background-image: url("../images/theme/house.png") !important;
+}
+.user-icon
+{
+	background-image: url("../images/theme/group.png") !important;
+}
+.msg-search
+{
+	background-image: url("../images/message/search.png") !important;
+}
+.delete
+{
+	background-image: url("../images/message/delete.png") !important;
+}
+.menu_message
+{
+	background-image: url("../images/message/email_open.png") !important;
+}
+.index-home
+{
+	background-image: url("..//images/theme/house.png") !important;
+}
+/*百度地图
+ * 
+ */
+.BMap_cpyCtrl
+{
+display:none; 
+}
+.anchorBL{
+display:none; 
+}

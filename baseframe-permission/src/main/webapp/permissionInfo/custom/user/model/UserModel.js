@@ -1,0 +1,9 @@
+Ext.define("BSOFT.custom.user.model.UserModel",{
+      extend:'Ext.data.Model',
+      fields:[
+           {name:'id',type:'string',sortable:true},
+           {name:'userId',type:'string',sorttable:true},
+           {name:'userName',type:'string',sortable:true},
+           {name:'roleName',type:'string',sorttable:true}
+      ]
+})

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="USERSROLES">
+  <insert id="addUsersRoles" parameterClass="com.bsoft.baseframe.entity.base.UsersRoles">insert into UsersRoles(id, roleId, orderNo, uid, remark, delflag, ctb1, ctb2, ctb3, ctb4, ext1, ext2, ext3) values (#id#, #roleId#, #orderNo#, #uid#, #remark#, #delflag#, getdate(), #ctb2#, #ctb3#, #ctb4#, #ext1#, #ext2#, #ext3#)</insert>
+  <delete id="removeUsersRoles" parameterClass="com.bsoft.baseframe.entity.base.UsersRoles">delete from UsersRoles where id = #id#</delete>
+  <update id="delUsersRoles" parameterClass="com.bsoft.baseframe.entity.base.UsersRoles">update UsersRoles set delflag=#delflag# where id = #id#</update>
+  <select id="getOneUsersRoles" parameterClass="com.bsoft.baseframe.entity.base.UsersRoles" resultClass="com.bsoft.baseframe.entity.base.UsersRoles">select * from UsersRoles where id = #id#</select>
+  <select id="queryCount" resultClass="int">select count(*) as countnum from UsersRoles where 1=1</select>
+  <select id="getUserRole" resultClass="com.bsoft.baseframe.entity.base.UsersRoles">select * from UsersRoles where uid=#value#</select>
+  <select id="listUsersRoles" resultClass="com.bsoft.baseframe.entity.base.UsersRoles" parameterClass="java.util.Map">select * from (select top $endNum$ row_number()over(order by TT.id) as RN,* from(SELECT * FROM UsersRoles where 1=1) as TT)as H where RN &gt; #startNum#</select>
+  <update id="upSapUsersRoles" parameterClass="com.bsoft.baseframe.entity.base.UsersRoles">UPDATE UsersRoles 
+    <dynamic prepend="set">
+      <isNotNull property="roleId" removeFirstPrepend="true" prepend=",">roleId=#roleId#</isNotNull>
+      <isNotNull property="orderNo" removeFirstPrepend="true" prepend=",">orderNo=#orderNo#</isNotNull>
+      <isNotNull property="uid" removeFirstPrepend="true" prepend=",">uid=#uid#</isNotNull>
+      <isNotNull property="remark" removeFirstPrepend="true" prepend=",">remark=#remark#</isNotNull>
+      <isNotNull property="delflag" removeFirstPrepend="true" prepend=",">delflag=#delflag#</isNotNull>
+      <isNotNull property="ctb1" removeFirstPrepend="true" prepend=",">ctb1=#ctb1#</isNotNull>
+      <isNotNull property="ctb2" removeFirstPrepend="true" prepend=",">ctb2=#ctb2#</isNotNull>
+      <isNotNull property="ctb3" removeFirstPrepend="true" prepend=",">ctb3=#ctb3#</isNotNull>
+      <isNotNull property="ctb4" removeFirstPrepend="true" prepend=",">ctb4=#ctb4#</isNotNull>
+      <isNotNull property="ext1" removeFirstPrepend="true" prepend=",">ext1=#ext1#</isNotNull>
+      <isNotNull property="ext2" removeFirstPrepend="true" prepend=",">ext2=#ext2#</isNotNull>
+      <isNotNull property="ext3" removeFirstPrepend="true" prepend=",">ext3=#ext3#</isNotNull>
+    </dynamic> where 
+    <isNotNull property="id">id = #id#</isNotNull>
+  </update>
+  <update id="updateUsersRoles" parameterClass="com.bsoft.baseframe.entity.base.UsersRoles">update UsersRoles set roleId=#roleId#, orderNo=#orderNo#, uid=#uid#, remark=#remark#, delflag=#delflag#, ctb1=#ctb1#, ctb2=#ctb2#, ctb3=getdate(), ctb4=#ctb4#, ext1=#ext1#, ext2=#ext2#, ext3=#ext3# where id = #id#</update>
+</sqlMap>

@@ -1,0 +1,19 @@
+@charset "utf-8";
+/* CSS Document */
+body,div,img,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,table,thead,tbody,th,td {    
+    margin:0;   
+    padding:0;
+	}
+	
+body{ font: 12px/1.8 '宋休',tahoma, Srial, helvetica, sans-serif; 
+	text-align:center;
+	overflow:hidden;
+	background:#270b13 url(../images/blue_bg.jpg) no-repeat center top;
+    } 
+img {border:0;}
+.mindex{width:990px; margin:auto; overflow:hidden;}
+.mindex_title{ background:url(../images/BsoftLOGO.png) no-repeat right 10px;font-size:38px;font-family:"微软雅黑";color:#fff;padding:8px 0 3px 0; text-align:left; width:970px;}
+.wrapper1{ padding:0;}
+*#thumb1-1,#thumb1-2,#thumb1-3,#thumb1-4,#thumb1-5,#thumb1-6,#thumb1-7{ display:inline; float:left; margin:5px;text-align:center;}
+.clear{ clear:both; text-align:left; line-height:20px; padding:5px;}
+a{ color:#fff; text-decoration:none;}

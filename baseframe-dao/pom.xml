@@ -1,0 +1,76 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+
+  <parent>
+  	<groupId>com.bsoft.baseframe</groupId>
+  	<artifactId>baseframe-parent</artifactId>
+  	<version>0.0.1-SNAPSHOT</version>
+  </parent>
+ 
+  <artifactId>baseframe-dao</artifactId>
+  <packaging>jar</packaging>
+
+  <name>baseframe-dao</name>
+  <url>http://maven.apache.org</url>
+
+  
+
+  <dependencies>
+  <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>baseframe-core</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+    </dependency>
+      <dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-test</artifactId>
+	</dependency>
+  </dependencies>
+  
+  <build>
+  <resources> 
+  	 <resource>  
+        <directory>src/main/resources</directory>  
+        <filtering>true</filtering>   
+      <!--  部署时不包含以下文件 
+        <excludes>  
+            <exclude>ibatis/db.properties</exclude> 
+            <exclude>ibatis/SqlMapConfigDao.xml</exclude>
+            <exclude>ibatis/baseframe/BaseFrameUser.xml</exclude>   
+            <exclude>log4j.properties</exclude> 
+            <exclude>spring/applicationContext.xml</exclude>
+            <exclude>spring/boneCP_applicationContext.xml</exclude>  
+        </excludes>
+         --> 
+    </resource> 
+  </resources>
+  		<plugins>  
+            <plugin>  
+                <artifactId>maven-source-plugin</artifactId>  
+                <version>2.1</version>  
+                <configuration>  
+                    <attach>true</attach>  
+                </configuration>  
+                <executions>  
+                    <execution>  
+                        <phase>compile</phase>  
+                        <goals>  
+                            <goal>jar</goal>  
+                        </goals>  
+                    </execution>  
+                </executions>  
+            </plugin>  
+        </plugins> 
+  
+  </build>
+  <!-- 跳过测试 -->
+  <properties>
+		<skipTests>true</skipTests>
+	</properties>
+</project>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<!-- 模板 -->
+<sqlMap namespace="OperPermission">
+  <!-- 查询所有信息  -->
+    <select id="selectPOperPermission" resultClass="com.bsoft.baseframe.entity.base.OperPermission" parameterClass="java.util.Map"> 
+        SELECT * FROM OperPermission
+    </select>
+     <!-- 根据id查询信息  -->
+    <select id="selectOperPermissionByRoleid" resultClass="com.bsoft.baseframe.entity.base.OperPermission" parameterClass="java.util.Map">  
+        SELECT * FROM OperPermission where roleId=#roleId#
+    </select>
+     <!-- 根据roleId查询信息出permissionType数据  -->
+    <select id="getCheckOperPermission" resultClass="com.bsoft.baseframe.entity.base.OperPermission" parameterClass="java.util.Map">  
+        SELECT permissionType FROM OperPermission where roleId=#roleId#
+    </select>
+     <!-- 根据roleId查询信息出一条数据  -->
+    <select id="selectOperPermissionByUid" resultClass="com.bsoft.baseframe.entity.base.OperPermission" parameterClass="java.lang.String">
+    	select * from OperPermission where roleId in (select roleId from UsersRoles where uid=#uid#)
+    </select>
+    <!--在用户权限表OperPermission中增加一条记录-->
+	<insert id="addOperPermission" parameterClass="com.bsoft.baseframe.entity.base.OperPermission">
+		insert into OperPermission(id, roleId, permissionType, ctb1, ctb2, ctb3, ctb4, ext1, ext2, ext3) values (#id#, #roleId#, #permissionType#, getdate(), #ctb2#, #ctb3#, #ctb4#, #ext1#, #ext2#, #ext3#)
+	</insert>
+	<!--在用户权限表OperPermission中根据roleId更新一条数据-->
+	 <update id="updateOperPermission" parameterClass="com.bsoft.baseframe.entity.base.OperPermission">
+	 	update OperPermission set id=#id#,permissionType=#permissionType#,ctb1=getdate(),ctb2=#ctb2#,ctb3=#ctb3#,ctb4=#ctb4#,ext1=#ext1#,ext2=#ext2#,ext3=#ext3# where roleId = #roleId#
+	</update>
+</sqlMap>

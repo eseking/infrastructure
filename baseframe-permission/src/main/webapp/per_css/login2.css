@@ -1,0 +1,28 @@
+@charset "utf-8";
+/* CSS Document */
+body,div,img,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,table,thead,tbody,th,td {    
+    margin:0;   
+    padding:0;
+	}
+	
+body{font: 12px/1.8 '宋休',tahoma, Srial, helvetica, sans-serif;	text-align:center; overflow:hidden;} 
+
+table { border-collapse:collapse; border-spacing:0;} 
+img {border:0;} 
+input{vertical-align:middle; font-family:Verdana;}
+a{ color:#333; text-decoration:none;cursor:pointer;}
+a:focus {outline:0;}/* for ff*/
+
+.login_bg{ width:100%;margin:0 auto;overflow:hidden;zoom:1; background:#16083d;}
+.loginBox{width:1217px; height:697px;background:url(../images/login_box2.jpg) no-repeat center top;margin:0 auto; position:relative;}
+.login{ width:330px; position:absolute; right:200px; top:235px;}
+.login td{padding:10px 0;color:#000; font-weight:bold; vertical-align:middle; text-align:left;}
+.inputs{width:210px; border:1px solid #cf8f06; background:url(../images/inputs_bg.jpg) repeat-x left top; height:25px; line-height:25px;padding-left:3px; border-radius:3px;-webkit-border-radius:3px;-moz-border-radius:3px;}
+.width90{ width:96px; float:left;}
+.yzm{ width:96px; height:30px; float:left; vertical-align:middle;margin:0 0 0 15px;}
+.loginBtn,.cancle{display:block; float:left;width:96px; height:63px;border:none;cursor:pointer;}
+.loginBtn{margin:0 10px 0 0; background:url(../images/login2.png) no-repeat 0 0;}
+.cancle{margin:0 0 0 10px;background:url(../images/cancle2.png) no-repeat 0 0;}
+a.loginBtn:hover{margin:0 10px 0 0; background:url(../images/login2.png) no-repeat 0 0;}
+a.cancle:hover{margin:0 0 0 10px; background:url(../images/cancle2.png) no-repeat 0 0;}
+.bosft{ position:absolute; right:200px; bottom:150px; color:#fff;}
