@@ -1,11 +1,11 @@
-package com.bsoft.baseframe.baseframe_dao;
+package com.soft.baseframe.baseframe_dao;
 
 import java.sql.Connection;
 import java.util.List;
 import java.util.Map;
 
-import com.bsoft.baseframe.exception.DBException;
-import com.bsoft.baseframe.utils.PageModel;
+import com.soft.baseframe.exception.DBException;
+import com.soft.baseframe.utils.PageModel;
 
 
 

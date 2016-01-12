@@ -2,6 +2,8 @@ package com.bsoft.baseframe.utils;
 
 import java.io.Serializable;
 
+import com.soft.baseframe.utils.PageModel;
+
 public class ApiResponse implements Serializable{
 	//api 状态  0  无异常  1 错误  2 session过期
 	private int api_code = 0;

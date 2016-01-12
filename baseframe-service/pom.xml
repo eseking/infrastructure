@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-  	<groupId>com.bsoft.baseframe</groupId>
+  	<groupId>com.soft.baseframe</groupId>
   	<artifactId>baseframe-parent</artifactId>
   	<version>0.0.1-SNAPSHOT</version>
   </parent>

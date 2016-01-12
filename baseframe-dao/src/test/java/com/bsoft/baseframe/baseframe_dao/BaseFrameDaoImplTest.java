@@ -10,7 +10,9 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.bsoft.baseframe.exception.DBException;
+import com.soft.baseframe.baseframe_dao.BaseFrameDao;
+import com.soft.baseframe.entity.base.BaseFrameUser;
+import com.soft.baseframe.exception.DBException;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:spring/*applicationContext.xml")
 public class BaseFrameDaoImplTest {
@@ -48,7 +50,10 @@ public class BaseFrameDaoImplTest {
 	@Test
 	public void testListEntityString() {
 		try {
-		//	baseFrameDao.addEntity("BASEFRAMEUSER.addBaseFrameUser", user);
+		BaseFrameUser user = new BaseFrameUser();
+		user.setUserId("test");
+		user.setUserName("user1");
+		baseFrameDao.addEntity("BASEFRAMEUSER.addBaseFrameUser", user);
 		List list =	baseFrameDao.listEntity("BASEFRAMEUSER.listAllUsers");
 		logger.info("结果集大小为 "+list.size());
 		} catch (Exception e) {

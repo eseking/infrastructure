@@ -1,4 +1,4 @@
-package com.bsoft.baseframe.utils;
+package com.soft.baseframe.utils;
 
 import java.io.Serializable;
 import java.util.List;

@@ -8,8 +8,8 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.bsoft.baseframe.exception.BusinessException;
 import com.bsoft.baseframe.utils.ApiResponse;
+import com.soft.baseframe.exception.BusinessException;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath*:spring/*applicationContext.xml")
 public class BaseFrameServiceImplTest {

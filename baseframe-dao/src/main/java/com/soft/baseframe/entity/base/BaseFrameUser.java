@@ -1,5 +1,5 @@
 /*
- * @(#)UsersRoles.java              1.0 2013-07-30
+ * @(#)BaseFrameUser.java              1.0 2013-07-30
  *
  * Copyright (c) 2007-2013 Shanghai BSOFT IT, Co., Ltd.
  * All rights reserved.
@@ -10,7 +10,7 @@
  * it only in accordance with the terms of the license agreement you
  * entered into with BSOFT.
  */
-package com.bsoft.baseframe.entity.base;
+package com.soft.baseframe.entity.base;
 
 
 import java.io.Serializable;
@@ -23,53 +23,74 @@ import java.io.Serializable;
  * @history	
  *       [date]	[version]	[name]	[content]
  */ 
-public class UsersRoles implements Serializable { 
+public class BaseFrameUser implements Serializable { 
 
-//	private static final long serialVersionUID = 1L;
-
+	private static final long serialVersionUID = 1L;
 
 	/** id doc 序号 */
-	private String id;
+	private int id;
 
-	public void setId(String id){
+	public void setId(int id){
 		this.id = id; 
 	}
 
-	public String getId(){
+	public int getId(){
 		return id;
 	}
 
-	/** roleId doc  */
-	private String roleId;
+	/** userId doc 账号 */
+	private String userId;
 
-	public void setRoleId(String roleId){
-		this.roleId = roleId; 
+	public void setUserId(String userId){
+		this.userId = userId; 
 	}
 
-	public String getRoleId(){
+	public String getUserId(){
+		return userId;
+	}
+
+	/** passwd doc 密码 */
+	private String passwd;
+
+	public void setPasswd(String passwd){
+		this.passwd = passwd; 
+	}
+
+	public String getPasswd(){
+		return passwd;
+	}
+
+	/** userName doc 名称 */
+	private String userName;
+
+	public void setUserName(String userName){
+		this.userName = userName; 
+	}
+
+	public String getUserName(){
+		return userName;
+	}
+
+	/** deptId doc 机构 */
+	private String deptId;
+
+	public void setDeptId(String deptId){
+		this.deptId = deptId; 
+	}
+
+	public String getDeptId(){
+		return deptId;
+	}
+	
+	private String roleId;
+	
+
+	public String getRoleId() {
 		return roleId;
 	}
 
-	/** orderNo doc  */
-	private Integer orderNo;
-
-	public void setOrderNo(Integer orderNo){
-		this.orderNo = orderNo; 
-	}
-
-	public Integer getOrderNo(){
-		return orderNo;
-	}
-
-	/** uid doc 名称 */
-	private String uid;
-
-	public void setUid(String uid){
-		this.uid = uid; 
-	}
-
-	public String getUid(){
-		return uid;
+	public void setRoleId(String roleId) {
+		this.roleId = roleId;
 	}
 
 	/** remark doc 备注 */
@@ -83,14 +104,25 @@ public class UsersRoles implements Serializable {
 		return remark;
 	}
 
+	/** pyCode doc 拼音码 */
+	private String pyCode;
+
+	public void setPyCode(String pyCode){
+		this.pyCode = pyCode; 
+	}
+
+	public String getPyCode(){
+		return pyCode;
+	}
+
 	/** delflag doc 删除标记 */
 	private String delflag;
 
-	public void setdelflag(String delflag){
+	public void setDelflag(String delflag){
 		this.delflag = delflag; 
 	}
 
-	public String getdelflag(){
+	public String getDelflag(){
 		return delflag;
 	}
 

@@ -1,4 +1,4 @@
-package com.bsoft.baseframe.baseframe_dao;
+package com.soft.baseframe.baseframe_dao;
 
 
 import java.lang.reflect.InvocationTargetException;
@@ -11,9 +11,9 @@ import java.util.Map;
 
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 
-import com.bsoft.baseframe.exception.DBException;
-import com.bsoft.baseframe.utils.PageModel;
 import com.google.gson.Gson;
+import com.soft.baseframe.exception.DBException;
+import com.soft.baseframe.utils.PageModel;
 
 
 

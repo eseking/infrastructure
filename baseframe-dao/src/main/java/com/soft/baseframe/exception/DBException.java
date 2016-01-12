@@ -11,7 +11,7 @@
  * entered into with BSOFT.
  */
 
-package com.bsoft.baseframe.exception;
+package com.soft.baseframe.exception;
 
 import java.sql.SQLException;
 
